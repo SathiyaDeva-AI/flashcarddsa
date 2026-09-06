@@ -6,108 +6,110 @@
 <meta name="mobile-web-app-capable" content="yes">
 <title>DSA Flashcards</title>
 <style>
-:root{--bg:#f5f6f8;--card:#fff;--text:#17181b;--muted:#686d76;--line:#e1e4e8;--accent:#5b5bd6;--good:#16834b;--bad:#c33f3f}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:env(safe-area-inset-bottom)}
-header{padding:18px max(18px,calc((100vw - 1000px)/2));background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3}
-h1{margin:0;font-size:24px}.sub{color:var(--muted);margin-top:4px;font-size:13px}
-main{max-width:900px;margin:auto;padding:18px}
-.toolbar{display:grid;grid-template-columns:1fr 180px 130px;gap:10px;margin-bottom:14px}
-select,input,button{font:inherit;border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:#fff}
-button{cursor:pointer;font-weight:600}button:active{transform:scale(.98)}
-.stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.pill{padding:7px 10px;border-radius:999px;background:#e9eaf0;color:#454852;font-size:13px}
-.progress{height:7px;background:#dddfe5;border-radius:99px;overflow:hidden;margin-bottom:18px}.bar{height:100%;width:0;background:var(--accent);transition:.2s}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;min-height:540px;box-shadow:0 6px 25px #0000000a;display:flex;flex-direction:column;overflow:hidden}
-.front,.back{padding:26px}.front{flex:1;display:flex;flex-direction:column;justify-content:center}.back{border-top:1px solid var(--line);background:#fafafd}
-.badges{display:flex;gap:7px;flex-wrap:wrap}.badge{font-size:12px;padding:5px 8px;border-radius:7px;background:#eeeef8}.difficulty{background:#edf7f0}.num{color:var(--muted)}
-.question{font-size:30px;line-height:1.2;margin:20px 0 10px;font-weight:750}.prompt{color:var(--muted);font-size:15px;line-height:1.6}
-.reveal{margin-top:20px;width:100%;padding:15px;background:#17181b;color:#fff;border:0}
-.answerGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answerGrid section{padding:12px;border:1px solid var(--line);border-radius:12px}.label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin-bottom:5px}
-pre{margin:10px 0 0;overflow:auto;background:#15171a;color:#eee;padding:14px;border-radius:10px;font-size:12px;line-height:1.45}
-.actions{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:10px;margin-top:14px}.again{color:var(--bad)}.known{color:var(--good)}.next{background:#17181b;color:white}
-.hidden{display:none}.hint{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
-@media(max-width:650px){main{padding:12px}.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1;order:-1}.card{min-height:560px}.question{font-size:25px}.answerGrid{grid-template-columns:1fr}.front,.back{padding:20px}.actions{position:sticky;bottom:0;background:var(--bg);padding:8px 0}.actions button{min-height:48px}}
+:root{--bg:#f4f5f7;--card:#fff;--text:#16181c;--muted:#68707b;--line:#dfe3e8;--accent:#5b5bd6;--good:#137a45;--bad:#bd3e3e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:18px max(16px,calc((100vw - 1000px)/2));position:sticky;top:0;z-index:5}
+h1{margin:0;font-size:24px}.sub{margin-top:4px;color:var(--muted);font-size:13px}
+main{max-width:980px;margin:auto;padding:16px}
+.toolbar{display:grid;grid-template-columns:1.4fr 1fr 150px;gap:9px;margin-bottom:12px}
+input,select,button{font:inherit;border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:#fff}
+button{font-weight:700;cursor:pointer}
+.categories{display:flex;gap:8px;overflow-x:auto;padding:3px 0 12px;scrollbar-width:none}.categories::-webkit-scrollbar{display:none}
+.cat{white-space:nowrap}.cat.active{background:#17181b;color:#fff}
+.stats{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.pill{background:#e8eaf0;padding:6px 9px;border-radius:999px;font-size:12px;color:#454a53}
+.progress{height:6px;background:#dddfe4;border-radius:99px;overflow:hidden;margin-bottom:14px}.bar{height:100%;width:0;background:var(--accent);transition:.2s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 7px 28px #0000000a;overflow:hidden}
+.front{padding:26px;min-height:500px;display:flex;flex-direction:column}.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.badges{display:flex;gap:6px;flex-wrap:wrap}.badge{font-size:12px;background:#eeeeF8;padding:5px 8px;border-radius:7px}.num{color:var(--muted);background:#eef0f3}
+.title{font-size:32px;line-height:1.15;margin:28px 0 12px;font-weight:800}
+.summary{font-size:17px;line-height:1.65;color:#333943;max-width:760px}
+.example{margin-top:18px;padding:13px 15px;border-left:4px solid var(--accent);background:#f7f7fc;border-radius:8px;color:#424752;font-size:14px}
+.reveal{margin-top:auto;padding:15px;background:#17181b;color:#fff;border:0;width:100%}
+.back{padding:24px;border-top:1px solid var(--line);background:#fafafd}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.box{border:1px solid var(--line);border-radius:12px;padding:12px;line-height:1.5}.label{text-transform:uppercase;letter-spacing:.06em;font-size:10px;color:var(--muted);font-weight:800;margin-bottom:4px}
+pre{background:#15171a;color:#eee;padding:14px;border-radius:10px;overflow:auto;font-size:12px;line-height:1.45}
+.actions{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:9px;margin-top:12px}.again{color:var(--bad)}.known{color:var(--good)}.next{background:#17181b;color:#fff}
+.hint{text-align:center;color:var(--muted);font-size:12px;margin-top:8px}
+.hidden{display:none}
+@media(max-width:650px){main{padding:11px}.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1}.front{min-height:540px;padding:20px}.title{font-size:27px;margin-top:25px}.summary{font-size:16px}.grid{grid-template-columns:1fr}.actions{position:sticky;bottom:0;background:var(--bg);padding:7px 0}.actions button{min-height:48px}}
 </style>
 </head>
 <body>
-<header><h1>🧠 DSA Flashcards</h1><div class="sub">Recognize the pattern before you write the code.</div></header>
+<header><h1>🧠 DSA Flashcards</h1><div class="sub">Practice category-by-category. Recall the pattern before revealing the solution.</div></header>
 <main>
 <div class="toolbar">
 <input id="search" placeholder="Search problems…">
-<select id="pattern"><option value="">All patterns</option></select>
-<select id="mode"><option value="all">All cards</option><option value="new">New</option><option value="again">Needs review</option><option value="known">Known</option></select>
+<select id="difficulty"><option value="">All difficulty</option><option>Easy</option><option>Medium</option><option>Hard</option></select>
+<select id="mode"><option value="all">All cards</option><option value="new">New</option><option value="again">Review</option><option value="known">Known</option></select>
 </div>
-<div class="stats"><span class="pill" id="count"></span><span class="pill" id="known"></span><span class="pill" id="due"></span></div>
+<div class="categories" id="categories"></div>
+<div class="stats"><span class="pill" id="count"></span><span class="pill" id="catCount"></span><span class="pill" id="knownStat"></span><span class="pill" id="reviewStat"></span></div>
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<div class="card" id="card">
+<div class="card">
 <div class="front">
-<div class="badges"><span class="badge num" id="num"></span><span class="badge" id="difficulty"></span><span class="badge" id="pat"></span></div>
-<div class="question" id="question"></div>
-<div class="prompt" id="prompt"></div>
+<div class="top"><div class="badges"><span class="badge num" id="num"></span><span class="badge" id="category"></span><span class="badge" id="diff"></span></div></div>
+<div class="title" id="title"></div>
+<div class="summary" id="summary"></div>
+<div class="example" id="example"></div>
 <button class="reveal" id="reveal">Reveal answer</button>
-<div class="hint">Space: reveal · ←/→: previous/next · 1: again · 2: known</div>
+<div class="hint">Space = reveal · ←/→ = previous/next · 1 = again · 2 = got it</div>
 </div>
 <div class="back hidden" id="back">
-<div class="answerGrid">
-<section><div class="label">Recognition trigger</div><div id="trigger"></div></section>
-<section><div class="label">Anti-trigger</div><div id="anti"></div></section>
-<section><div class="label">Core insight</div><div id="insight"></div></section>
-<section><div class="label">Complexity</div><div id="complexity"></div></section>
+<div class="grid">
+<div class="box"><div class="label">Recognition trigger</div><div id="trigger"></div></div>
+<div class="box"><div class="label">Anti-trigger</div><div id="anti"></div></div>
+<div class="box"><div class="label">Core insight</div><div id="insight"></div></div>
+<div class="box"><div class="label">Pattern</div><div id="pattern"></div></div>
 </div>
-<div style="margin-top:14px"><div class="label">Clean Python solution</div><pre id="code"></pre></div>
+<div style="margin-top:13px"><div class="label">Clean Python solution</div><pre id="code"></pre></div>
 </div>
 </div>
-<div class="actions">
-<button class="again" id="again">↻ Again</button>
-<button class="next" id="next">Next card →</button>
-<button class="known" id="knownBtn">✓ Got it</button>
-</div>
+<div class="actions"><button class="again" id="again">↻ Again</button><button class="next" id="next">Next →</button><button class="known" id="known">✓ Got it</button></div>
 </main>
 <script src="data.js"></script>
 <script>
-const state=JSON.parse(localStorage.getItem("dsaFlashState")||"{}");
-let deck=[], idx=0, revealed=false;
-const $=id=>document.getElementById(id);
-const save=()=>localStorage.setItem("dsaFlashState",JSON.stringify(state));
-function patterns(){return [...new Set(problems.map(p=>p.pattern).filter(Boolean))].sort()}
-patterns().forEach(p=>{let o=document.createElement("option");o.value=p;o.textContent=p;$("pattern").append(o)});
+const state=JSON.parse(localStorage.getItem("dsaFlashStateV2")||"{}");
+let category="",deck=[],idx=0;
+const $=x=>document.getElementById(x);
+const save=()=>localStorage.setItem("dsaFlashStateV2",JSON.stringify(state));
+const cats=[...new Set(problems.map(p=>p.category).filter(Boolean))].sort();
+cats.forEach(c=>{const b=document.createElement("button");b.className="cat";b.textContent=c;b.onclick=()=>{category=c;idx=0;drawCats();render()};$("categories").append(b)});
+const all=document.createElement("button");all.className="cat active";all.textContent="All Categories";all.onclick=()=>{category="";idx=0;drawCats();render()};$("categories").prepend(all);
+function drawCats(){[...$("categories").children].forEach(b=>b.classList.toggle("active",(b.textContent==="All Categories"&&!category)||b.textContent===category))}
 function filtered(){
- const q=$("search").value.toLowerCase(), pat=$("pattern").value, mode=$("mode").value;
+ const q=$("search").value.toLowerCase(), d=$("difficulty").value, mode=$("mode").value;
  return problems.filter(p=>{
-   const text=(p.name+" "+(p.summary||"")+" "+(p.pattern||"")).toLowerCase();
-   const status=state[p.id]||"new";
-   return (!q||text.includes(q))&&(!pat||p.pattern===pat)&&(mode==="all"||status===mode);
- });
+   const s=state[p.id]||"new", txt=(p.name+" "+p.description+" "+p.category).toLowerCase();
+   return (!category||p.category===category)&&(!q||txt.includes(q))&&(!d||p.difficulty===d)&&(mode==="all"||s===mode)
+ })
 }
 function render(){
- deck=filtered(); if(!deck.length){$("question").textContent="No cards match this filter."; $("prompt").textContent="Try another pattern or search."; $("back").classList.add("hidden");$("reveal").classList.remove("hidden");return}
- if(idx>=deck.length)idx=0; const p=deck[idx]; revealed=false;
- $("num").textContent="#"+p.id;$("difficulty").textContent=p.difficulty||"";
- $("pat").textContent=p.pattern||"";
- $("question").textContent=p.name;
- $("prompt").textContent=p.description||p.summary||"Try to identify the pattern, trigger, and invariant before revealing.";
- $("back").classList.add("hidden");$("reveal").classList.remove("hidden");
+ deck=filtered(); if(idx>=deck.length)idx=0;
+ $("catCount").textContent=category||"All categories";
+ $("count").textContent=`Card ${deck.length?idx+1:0} / ${deck.length}`;
+ const known=Object.values(state).filter(x=>x==="known").length, review=Object.values(state).filter(x=>x==="again").length;
+ $("knownStat").textContent=`✓ ${known} known`;$("reviewStat").textContent=`↻ ${review} review`;
+ $("bar").style.width=deck.length?((idx+1)/deck.length*100)+"%":"0";
+ if(!deck.length){$("title").textContent="No cards match";$("summary").textContent="Choose another category or filter.";$("example").textContent="";$("back").classList.add("hidden");$("reveal").classList.remove("hidden");return}
+ const p=deck[idx];
+ $("num").textContent="#"+p.id;$("category").textContent=p.category;$("diff").textContent=p.difficulty;
+ $("title").textContent=p.name;
+ $("summary").textContent=p.description||"Problem summary not available in the source.";
+ $("example").textContent="Before revealing: identify the pattern, trigger, and invariant. Then try the solution from memory.";
  $("trigger").textContent=p.trigger||"Not specified in the source.";
  $("anti").textContent=p.anti||"Not specified in the source.";
  $("insight").textContent=p.insight||"Not specified in the source.";
- $("complexity").textContent=(p.complexity||"Not specified in the source.");
+ $("pattern").textContent=p.category;
  $("code").textContent=p.code||"# Solution not provided in the source.";
- updateStats();
+ $("back").classList.add("hidden");$("reveal").classList.remove("hidden");
 }
-function updateStats(){
- const known=Object.values(state).filter(x=>x==="known").length, due=Object.values(state).filter(x=>x==="again").length;
- $("count").textContent=`Card ${deck.length?idx+1:0} / ${deck.length}`;
- $("known").textContent=`✓ Known ${known}`;
- $("due").textContent=`↻ Review ${due}`;
- $("bar").style.width=deck.length?((idx+1)/deck.length*100)+"%":"0";
-}
-function reveal(){if(!deck.length)return;revealed=true;$("back").classList.remove("hidden");$("reveal").classList.add("hidden")}
-function rate(v){if(!deck.length)return;state[deck[idx].id]=v;save();next()}
-function next(){if(!deck.length)return;idx=(idx+1)%deck.length;render()}
-function prev(){if(!deck.length)return;idx=(idx-1+deck.length)%deck.length;render()}
-$("reveal").onclick=reveal;$("next").onclick=next;$("again").onclick=()=>rate("again");$("knownBtn").onclick=()=>rate("known");
-$("search").oninput=()=>{idx=0;render()};$("pattern").onchange=()=>{idx=0;render()};$("mode").onchange=()=>{idx=0;render()};
-document.addEventListener("keydown",e=>{if(e.target.matches("input,select"))return;if(e.key===" "){e.preventDefault();reveal()}else if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")prev();else if(e.key==="1")rate("again");else if(e.key==="2")rate("known")});
-render();
+function reveal(){if(deck.length){$("back").classList.remove("hidden");$("reveal").classList.add("hidden")}}
+function next(){if(deck.length){idx=(idx+1)%deck.length;render()}}
+function rate(v){if(deck.length){state[deck[idx].id]=v;save();next()}}
+$("reveal").onclick=reveal;$("next").onclick=next;$("again").onclick=()=>rate("again");$("known").onclick=()=>rate("known");
+$("search").oninput=()=>{idx=0;render()};$("difficulty").onchange=()=>{idx=0;render()};$("mode").onchange=()=>{idx=0;render()};
+document.addEventListener("keydown",e=>{if(e.target.matches("input,select"))return;if(e.key===" "){e.preventDefault();reveal()}else if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft"){idx=(idx-1+deck.length)%deck.length;render()}else if(e.key==="1")rate("again");else if(e.key==="2")rate("known")});
+drawCats();render();
 </script>
 </body></html>

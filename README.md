@@ -1,14 +1,19 @@
-# DSA Flashcards
+# DSA Flashcards — Category Edition
 
-A static, iPhone-friendly flashcard app built from the 155-problem DSA Pattern Playbook.
+155 source problems converted into a category-first flashcard app.
 
-Features:
-- One problem per flashcard
-- Reveal trigger, anti-trigger, insight, complexity, and Python solution
-- Again / Got it tracking in localStorage
-- Search and pattern filtering
-- New / review / known modes
-- Keyboard shortcuts
-- Mobile Safari-friendly layout
+Front of card:
+- Problem number
+- Problem title
+- Difficulty
+- Category
+- Problem summary
 
-Deploy `index.html` and `data.js` together to Vercel.
+Practice:
+- Category-by-category horizontal category selector
+- Search
+- Difficulty filter
+- New / Review / Known modes
+- Reveal answer
+- Recognition trigger, anti-trigger, core insight, pattern, Python solution
+- Again / Got it progress stored locally
