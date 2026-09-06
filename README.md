@@ -1,19 +1,15 @@
-# DSA Flashcards — Category Edition
+# DSA Flashcards — Category + Examples Edition
 
-155 source problems converted into a category-first flashcard app.
-
-Front of card:
+Front of each flashcard:
 - Problem number
 - Problem title
 - Difficulty
 - Category
 - Problem summary
+- Example Input
+- Example Output
+- Example Explanation
 
-Practice:
-- Category-by-category horizontal category selector
-- Search
-- Difficulty filter
-- New / Review / Known modes
-- Reveal answer
-- Recognition trigger, anti-trigger, core insight, pattern, Python solution
-- Again / Got it progress stored locally
+The example content is taken directly from the attached source when present.
+Category filtering, search, difficulty, New/Review/Known modes, reveal answer,
+and local progress tracking are included.
