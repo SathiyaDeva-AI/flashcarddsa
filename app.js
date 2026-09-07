@@ -1,0 +1,15 @@
+const $=s=>document.querySelector(s);
+const st={cat:"All",diff:"All",mode:"All",i:0,rev:false,q:"",p:JSON.parse(localStorage.getItem("dsa-v5")||"{}")};
+const cats=["All",...new Set(PROBLEMS.map(x=>x.category).filter(Boolean))];
+function save(){localStorage.setItem("dsa-v5",JSON.stringify(st))}
+function list(){return PROBLEMS.filter((x,i)=>{let s=st.p[i]?.status||"new";return(st.cat=="All"||x.category==st.cat)&&(st.diff=="All"||x.difficulty==st.diff)&&(!st.q||JSON.stringify(x).toLowerCase().includes(st.q.toLowerCase()))&&(st.mode=="All"||s.toLowerCase()==st.mode.toLowerCase())})}
+function esc(x){return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function render(){let a=list();if(st.i>=a.length)st.i=0;$("#cats").innerHTML=cats.map(c=>`<button class="${st.cat==c?"on":""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");$("#count").textContent=a.length+" cards";$("#pos").textContent=a.length?`${st.i+1} / ${a.length}`:"0 / 0";if(!a.length){$("#card").innerHTML="<div class=empty>No cards match.</div>";return}let x=a[st.i],gi=PROBLEMS.indexOf(x);
+const ex=`<div class=ex><div><b>Input:</b> <code>${esc(x.input)}</code></div><div><b>Output:</b> <code>${esc(x.output)}</code></div><div><b>Explanation:</b> ${esc(x.explanation)}</div></div>`;
+$("#card").innerHTML=st.rev?`<div class=meta>#${gi+1} · ${esc(x.category)} · ${x.difficulty}</div><h1>${esc(x.title)}</h1><h3>Recognition / Trigger</h3><p>Look for the ${esc(x.category)} pattern and identify the invariant that avoids brute force.</p><h3>Core Insight</h3><p>State the invariant first, then implement the smallest template that preserves it.</p><h3>Python Template</h3><pre><code># ${esc(x.category)} pattern
+# Start by stating the invariant, then derive the loop/state.
+pass</code></pre><button id=again>Again</button> <button id=got class=primary>Got it</button>`:
+`<div class=meta>#${gi+1} · ${esc(x.category)} · ${x.difficulty}</div><h1>${esc(x.title)}</h1><h3>Problem Summary</h3><p>${esc(x.summary)}</p><h3>Example</h3>${ex}<button id=rev class=primary>Reveal Answer</button>`;
+if($("#rev"))$("#rev").onclick=()=>{st.rev=true;render()};if($("#again"))$("#again").onclick=()=>mark("review");if($("#got"))$("#got").onclick=()=>mark("known")}
+function mark(s){let a=list(),x=a[st.i],gi=PROBLEMS.indexOf(x);st.p[gi]={status:s};save();st.rev=false;st.i=(st.i+1)%Math.max(1,a.length);render()}
+$("#cats").onclick=e=>{if(e.target.dataset.c){st.cat=e.target.dataset.c;st.i=0;st.rev=false;render()}};$("#search").oninput=e=>{st.q=e.target.value;st.i=0;render()};$("#diff").onchange=e=>{st.diff=e.target.value;st.i=0;render()};$("#mode").onchange=e=>{st.mode=e.target.value;st.i=0;render()};$("#next").onclick=()=>{let a=list();if(a.length){st.i=(st.i+1)%a.length;st.rev=false;render()}};$("#prev").onclick=()=>{let a=list();if(a.length){st.i=(st.i-1+a.length)%a.length;st.rev=false;render()}};render();
